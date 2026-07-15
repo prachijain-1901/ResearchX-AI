@@ -1,0 +1,21 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploaded PDFs
+uploads/
+
+# Reports generated
+reports/
+
+# VS Code settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db

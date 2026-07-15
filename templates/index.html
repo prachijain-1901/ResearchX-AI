@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResearchX AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>ResearchX AI</h1>
+
+    <p>
+        IBM watsonx Powered Research Assistant
+    </p>
+
+    <!-- ========================= -->
+    <!-- Research Topic Generator -->
+    <!-- ========================= -->
+
+    <h2>Generate Research Report</h2>
+
+    <textarea
+        id="topic"
+        placeholder="Enter your research topic..."
+    ></textarea>
+
+    <button id="generateBtn">
+        Generate Research
+    </button>
+
+    <hr>
+
+    <!-- ========================= -->
+    <!-- PDF Upload -->
+    <!-- ========================= -->
+
+    <h2>Analyze Research Paper (PDF)</h2>
+
+    <input
+        type="file"
+        id="pdfFile"
+        accept=".pdf"
+    >
+
+    <button id="analyzePdfBtn">
+        Analyze PDF
+    </button>
+
+    <hr>
+
+    <!-- ========================= -->
+    <!-- Loading -->
+    <!-- ========================= -->
+
+    <div id="loading">
+        ⏳ Processing with IBM watsonx...
+    </div>
+
+    <!-- ========================= -->
+    <!-- Output -->
+    <!-- ========================= -->
+
+    <div id="output"></div>
+    <br>
+    <button id="downloadBtn" style="display:none;">
+        📄 Download Report (PDF)
+    </button>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
