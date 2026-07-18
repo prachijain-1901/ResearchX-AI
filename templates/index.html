@@ -59,7 +59,86 @@
     <hr>
 
     <!-- ========================= -->
-    <!-- Loading -->
+    <!-- Agent Activity Panel     -->
+    <!-- ========================= -->
+
+    <div id="agentPanel" class="agent-panel" style="display:none;">
+
+        <h2 class="agent-panel-title">Agent Activity</h2>
+
+        <div class="agent-pipeline">
+
+            <!-- Step 1: Planner Agent -->
+            <div class="agent-step" id="step-planner">
+                <div class="agent-step-connector"></div>
+                <div class="agent-step-card">
+                    <div class="agent-step-icon">🤖</div>
+                    <div class="agent-step-body">
+                        <div class="agent-step-name">Planner Agent</div>
+                        <div class="agent-step-status" id="status-planner">Waiting...</div>
+                    </div>
+                    <div class="agent-step-badge" id="badge-planner">PENDING</div>
+                </div>
+            </div>
+
+            <!-- Step 2: Task Agent (Research or PDF) -->
+            <div class="agent-step" id="step-task">
+                <div class="agent-step-connector"></div>
+                <div class="agent-step-card">
+                    <div class="agent-step-icon" id="icon-task">🔍</div>
+                    <div class="agent-step-body">
+                        <div class="agent-step-name" id="name-task">Task Agent</div>
+                        <div class="agent-step-status" id="status-task">Waiting...</div>
+                    </div>
+                    <div class="agent-step-badge" id="badge-task">PENDING</div>
+                </div>
+            </div>
+
+            <!-- Step 3: Report Agent -->
+            <div class="agent-step" id="step-report">
+                <div class="agent-step-connector"></div>
+                <div class="agent-step-card">
+                    <div class="agent-step-icon">📝</div>
+                    <div class="agent-step-body">
+                        <div class="agent-step-name">Report Agent</div>
+                        <div class="agent-step-status" id="status-report">Waiting...</div>
+                    </div>
+                    <div class="agent-step-badge" id="badge-report">PENDING</div>
+                </div>
+            </div>
+
+            <!-- Step 4: IBM watsonx -->
+            <div class="agent-step" id="step-watsonx">
+                <div class="agent-step-connector"></div>
+                <div class="agent-step-card">
+                    <div class="agent-step-icon">⚡</div>
+                    <div class="agent-step-body">
+                        <div class="agent-step-name">IBM watsonx AI</div>
+                        <div class="agent-step-status" id="status-watsonx">Waiting...</div>
+                    </div>
+                    <div class="agent-step-badge" id="badge-watsonx">PENDING</div>
+                </div>
+            </div>
+
+            <!-- Step 5: Complete -->
+            <div class="agent-step" id="step-complete">
+                <div class="agent-step-connector"></div>
+                <div class="agent-step-card">
+                    <div class="agent-step-icon">✅</div>
+                    <div class="agent-step-body">
+                        <div class="agent-step-name">Complete</div>
+                        <div class="agent-step-status" id="status-complete">Waiting...</div>
+                    </div>
+                    <div class="agent-step-badge" id="badge-complete">PENDING</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Loading (legacy)          -->
     <!-- ========================= -->
 
     <div id="loading">

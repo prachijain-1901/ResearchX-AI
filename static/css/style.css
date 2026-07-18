@@ -182,9 +182,235 @@ pre{
 
 }
 
-/* ========================= */
-/* Print Styles */
-/* ========================= */
+
+/* ======================================== */
+/* Agent Activity Panel                     */
+/* ======================================== */
+
+.agent-panel {
+    margin-top: 30px;
+    background: linear-gradient(135deg, #f8faff 0%, #eef3ff 100%);
+    border: 2px solid #d0daf5;
+    border-radius: 14px;
+    padding: 28px 24px 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.agent-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0f62fe, #6929c4, #0f62fe);
+    background-size: 200% 100%;
+    animation: shimmer-bar 2s ease-in-out infinite;
+}
+
+@keyframes shimmer-bar {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.agent-panel-title {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    font-size: 18px;
+    color: #0f62fe;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.agent-panel-title::before {
+    content: "⚙️";
+}
+
+
+/* ---- Pipeline container ---- */
+
+.agent-pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+
+/* ---- Individual step ---- */
+
+.agent-step {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.agent-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---- Connector line between steps ---- */
+
+.agent-step-connector {
+    width: 3px;
+    height: 18px;
+    margin-left: 28px;
+    background: #d0daf5;
+    border-radius: 2px;
+    transition: background 0.4s ease;
+}
+
+.agent-step:first-child .agent-step-connector {
+    display: none;
+}
+
+.agent-step.done .agent-step-connector {
+    background: #24a148;
+}
+
+.agent-step.active .agent-step-connector {
+    background: #0f62fe;
+}
+
+
+/* ---- Step card ---- */
+
+.agent-step-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1.5px solid #e0e6f0;
+    box-shadow: 0 2px 8px rgba(15, 98, 254, 0.04);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.agent-step.active .agent-step-card {
+    border-color: #0f62fe;
+    box-shadow: 0 3px 14px rgba(15, 98, 254, 0.14);
+    background: #f0f4ff;
+}
+
+.agent-step.done .agent-step-card {
+    border-color: #24a148;
+    background: #f3fbf5;
+}
+
+.agent-step.error .agent-step-card {
+    border-color: #da1e28;
+    background: #fff1f1;
+}
+
+
+/* ---- Icon ---- */
+
+.agent-step-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    width: 38px;
+    text-align: center;
+}
+
+
+/* ---- Body (name + status) ---- */
+
+.agent-step-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.agent-step-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+}
+
+.agent-step-status {
+    font-size: 13px;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.agent-step.active .agent-step-status {
+    color: #0f62fe;
+}
+
+.agent-step.done .agent-step-status {
+    color: #24a148;
+}
+
+.agent-step.error .agent-step-status {
+    color: #da1e28;
+}
+
+
+/* ---- Badge ---- */
+
+.agent-step-badge {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: #e8ecf2;
+    color: #6c7a8d;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+.agent-step.active .agent-step-badge {
+    background: #0f62fe;
+    color: #fff;
+    animation: pulse-badge 1.2s ease-in-out infinite;
+}
+
+.agent-step.done .agent-step-badge {
+    background: #24a148;
+    color: #fff;
+}
+
+.agent-step.error .agent-step-badge {
+    background: #da1e28;
+    color: #fff;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+
+
+/* ---- Spinner for active steps ---- */
+
+.agent-step.active .agent-step-status::after {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+    border: 2px solid #0f62fe;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* ======================================== */
+/* Print Styles                             */
+/* ======================================== */
 
 @media print{
 
@@ -198,6 +424,7 @@ pre{
     input,
     button,
     #loading,
+    .agent-panel,
     hr{
 
         display:none;

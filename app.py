@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from services.watsonx import generate_research, analyze_pdf
-from services.pdf_service import extract_text
+from agents.agent_manager import handle_research, handle_pdf
 import os
 
 app = Flask(__name__)
@@ -17,6 +16,9 @@ def home():
 # ----------------------------
 # Generate Research from Topic
 # ----------------------------
+# Now routed through the Multi-Agent pipeline:
+#   Planner → Research Agent → Report Agent
+# ----------------------------
 @app.route("/api/research", methods=["POST"])
 def api_research():
 
@@ -29,15 +31,21 @@ def api_research():
             "error": "Please enter a research topic."
         }), 400
 
-    result = generate_research(topic)
+    # Delegate to the Agent Manager
+    report = handle_research(topic)
 
+    # Return the full report as "research" to maintain backward compatibility
     return jsonify({
-        "research": result
+        "research": report.get("full_report", ""),
+        "structured_report": report
     })
 
 
 # ----------------------------
 # Analyze Uploaded PDF
+# ----------------------------
+# Now routed through the Multi-Agent pipeline:
+#   Planner → PDF Agent → Report Agent
 # ----------------------------
 @app.route("/api/analyze_pdf", methods=["POST"])
 def analyze_pdf_route():
@@ -58,12 +66,13 @@ def analyze_pdf_route():
 
     pdf.save(filepath)
 
-    text = extract_text(filepath)
+    # Delegate to the Agent Manager
+    report = handle_pdf(filepath)
 
-    result = analyze_pdf(text)
-
+    # Return the full report as "research" to maintain backward compatibility
     return jsonify({
-        "research": result
+        "research": report.get("full_report", ""),
+        "structured_report": report
     })
 
 
